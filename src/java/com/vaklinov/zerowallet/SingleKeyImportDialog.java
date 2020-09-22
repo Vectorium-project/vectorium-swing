@@ -216,7 +216,7 @@ public class SingleKeyImportDialog
 						SingleKeyImportDialog.this.getRootPane().getParent(), 
 						"An error occurred when importing private key. Error message is:\n" +
 						e.getClass().getName() + ":\n" + e.getMessage() + "\n\n" +
-						"Please ensure that vectoriumd is running and the key is in the correct \n" + 
+						"Please ensure that vectd is running and the key is in the correct \n" + 
 						"form. You may try again later...\n", 
 						"Error in importing private key", JOptionPane.ERROR_MESSAGE);
 				} finally

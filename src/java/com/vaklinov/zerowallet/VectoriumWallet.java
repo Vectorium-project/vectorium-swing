@@ -402,18 +402,18 @@ public class VectoriumWallet
         			}
         		}
             
-            // If vectoriumd is currently not running, do a startup of the daemon as a child process
+            // If vectd is currently not running, do a startup of the daemon as a child process
             // It may be started but not ready - then also show dialog
             VectoriumInstallationObserver initialInstallationObserver = 
             	new VectoriumInstallationObserver(preferences.commandLineToolsDir());
-            DaemonInfo vectoriumdInfo = initialInstallationObserver.getDaemonInfo();
+            DaemonInfo vectdInfo = initialInstallationObserver.getDaemonInfo();
             initialInstallationObserver = null;
             
             VectoriumClientCaller initialClientCaller = new VectoriumClientCaller(preferences.commandLineToolsDir());
             boolean daemonStartInProgress = false;
             try
             {
-            	if (vectoriumdInfo.status == DAEMON_STATUS.RUNNING)
+            	if (vectdInfo.status == DAEMON_STATUS.RUNNING)
             	{
             		NetworkAndBlockchainInfo info = initialClientCaller.getNetworkAndBlockchainInfo();
             		// If more than 20 minutes behind in the blockchain - startup in progress
@@ -429,16 +429,16 @@ public class VectoriumWallet
                 if ((wce.getMessage().indexOf("{\"code\":-28") != -1) || // Started but not ready
                 	(wce.getMessage().indexOf("error code: -28") != -1))
                 {
-                	Log.info("vectoriumd is currently starting...");
+                	Log.info("vectd is currently starting...");
                 	daemonStartInProgress = true;
                 }
             }
             
             StartupProgressDialog startupBar = null;
-            if ((vectoriumdInfo.status != DAEMON_STATUS.RUNNING) || (daemonStartInProgress))
+            if ((vectdInfo.status != DAEMON_STATUS.RUNNING) || (daemonStartInProgress))
             {
             	Log.info(
-            		"vectoriumd is not runing at the moment or has not started/synchronized 100% - showing splash...");
+            		"vectd is not runing at the moment or has not started/synchronized 100% - showing splash...");
 	            startupBar = new StartupProgressDialog(initialClientCaller);
 	            startupBar.setVisible(true);
 	            startupBar.waitForStartup();
@@ -469,7 +469,7 @@ public class VectoriumWallet
             {
                 JOptionPane.showMessageDialog(
                         null,
-                        "It appears that vectoriumd has been started but is not ready to accept wallet\n" +
+                        "It appears that vectd has been started but is not ready to accept wallet\n" +
                         "connections. It is still loading the wallet and blockchain. Please try to \n" +
                         "start the GUI wallet later...",
                         "Wallet communication error",
@@ -479,8 +479,8 @@ public class VectoriumWallet
                 JOptionPane.showMessageDialog(
                     null,
                     "There was a problem communicating with the Vectorium daemon/wallet. \n" +
-                    "Please ensure that the Vectorium server vectoriumd is started (e.g. via \n" + 
-                    "command  \"vectoriumd --daemon\"). Error message is: \n" +
+                    "Please ensure that the Vectorium server vectd is started (e.g. via \n" + 
+                    "command  \"vectd --daemon\"). Error message is: \n" +
                      wce.getMessage() +
                     "See the console output for more detailed error information!",
                     "Wallet communication error",

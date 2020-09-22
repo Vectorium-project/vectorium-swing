@@ -55,7 +55,7 @@ import com.vaklinov.vectoriumwallet.OSUtil.OS_TYPE;
 
 
 /**
- * Calls vectorium-cli
+ * Calls vect-cli
  *
  * @author Ivan Vaklinov <ivan@vaklinov.com>
  */
@@ -98,7 +98,7 @@ public class VectoriumClientCaller
 
 
 	// Vectorium client program and daemon
-	private File vectoriumcli, vectoriumd;
+	private File vectoriumcli, vectd;
 
 
 	public VectoriumClientCaller(String installDir)
@@ -117,20 +117,20 @@ public class VectoriumClientCaller
 		{
 			throw new IOException(
 				"The Vectorium installation directory " + installDir + " needs to contain " +
-				"the command line utilities vectoriumd and vectorium-cli. vectorium-cli is missing!");
+				"the command line utilities vectd and vect-cli. vect-cli is missing!");
 		}
 		
-		vectoriumd = new File(dir, OSUtil.getVectoriumd());
-		if (!vectoriumd.exists())
+		vectd = new File(dir, OSUtil.getvectd());
+		if (!vectd.exists())
 		{
-		    vectoriumd = OSUtil.findVectoriumCommand(OSUtil.getVectoriumd());
+		    vectd = OSUtil.findVectoriumCommand(OSUtil.getvectd());
 		}
 		
-		if (vectoriumd == null || (!vectoriumd.exists()))
+		if (vectd == null || (!vectd.exists()))
 		{
 		    throw new IOException(
 		    	"The Vectorium command line utility " + vectoriumcli.getCanonicalPath() + 
-		    	" was found, but vectoriumd was not found!");
+		    	" was found, but vectd was not found!");
 		}
 	}
 
@@ -143,7 +143,7 @@ public class VectoriumClientCaller
 	    CommandExecutor starter = new CommandExecutor(
 	        new String[] 
 	        {
-	        	vectoriumd.getCanonicalPath(), 
+	        	vectd.getCanonicalPath(), 
 	        	"-exportdir=" + exportDir
 	        });
 	    
@@ -308,7 +308,7 @@ public class VectoriumClientCaller
 	}
 
 
-	// ./src/vectorium-cli listunspent only returns T addresses it seems
+	// ./src/vect-cli listunspent only returns T addresses it seems
 	public synchronized String[] getWalletPublicAddressesWithUnspentOutputs()
 		throws WalletCallException, IOException, InterruptedException
 	{
@@ -325,7 +325,7 @@ public class VectoriumClientCaller
      }
 
 
-	// ./vectorium-cli listreceivedbyaddress 0 true
+	// ./vect-cli listreceivedbyaddress 0 true
 	public synchronized String[] getWalletAllPublicAddresses()
 		throws WalletCallException, IOException, InterruptedException
 	{
@@ -671,7 +671,7 @@ public class VectoriumClientCaller
 
 
     // Wallet locks check - an unencrypted wallet will give an error
-	// vectorium-cli walletlock
+	// vect-cli walletlock
 	// error: {"code":-15,"message":"Error: running with an unencrypted wallet, but walletlock was called."}
 	public synchronized boolean isWalletEncrypted()
    		throws WalletCallException, IOException, InterruptedException
@@ -729,11 +729,11 @@ public class VectoriumClientCaller
 	/**
 	 * Encrypts the wallet. Typical success/error use cases are:
 	 *
-	 * ./vectorium-cli encryptwallet "1234"
+	 * ./vect-cli encryptwallet "1234"
 	 * wallet encrypted; Bitcoin server stopping, restart to run with encrypted wallet.
 	 * The keypool has been flushed, you need to make a new backup.
 	 *
-	 * ./vectorium-cli encryptwallet "1234"
+	 * ./vect-cli encryptwallet "1234"
 	 * error: {"code":-15,"message":"Error: running with an encrypted wallet, but encryptwallet was called."}
 	 *
 	 * @param password

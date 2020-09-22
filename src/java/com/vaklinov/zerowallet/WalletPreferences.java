@@ -91,7 +91,7 @@ public class WalletPreferences {
 		if (!Files.isDirectory(Paths.get(defaultCommandLineToolsDir))) {
 			Log.info("Will ask for the directory where the command line tools are");
 			JOptionPane.showMessageDialog(new JFrame(),
-					"Please select the directory where the command line utils are installed:\nvectoriumd, vectorium-cli and vectorium-tx",
+					"Please select the directory where the command line utils are installed:\nvectd, vect-cli and vect-tx",
 					"Directory selection",
 			        JOptionPane.INFORMATION_MESSAGE);
 			JFileChooser dirChooser = new JFileChooser();

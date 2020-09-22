@@ -389,7 +389,7 @@ public class DashboardPanel
 		}
 		
 		String text =
-			"<html><span style=\"font-weight:bold;color:#303030\">vectoriumd</span> status: " + 
+			"<html><span style=\"font-weight:bold;color:#303030\">vectd</span> status: " + 
 		    daemonStatus + ",  " + runtimeInfo + " <br/>" +
 			"Wallet: <span style=\"font-weight:bold;color:#303030\">" + walletDAT.getCanonicalPath() + "</span>" + 
 			walletEncryption + " <br/> " +

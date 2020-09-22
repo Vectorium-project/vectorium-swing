@@ -80,8 +80,8 @@ public class StartupProgressDialog extends JFrame {
 //                performOSXBundleLaunch();
 //        }
         
-        Log.info("Splash: checking if vectoriumd is already running...");
-        boolean shouldStartVectoriumd = false;
+        Log.info("Splash: checking if vectd is already running...");
+        boolean shouldStartvectd = false;
         try {
             clientCaller.getDaemonRawRuntimeInfo();
         } catch (IOException e) { 
@@ -90,22 +90,22 @@ public class StartupProgressDialog extends JFrame {
         	if (e.getMessage() != null && 
         		e.getMessage().toLowerCase(Locale.ROOT).contains("error: couldn't connect to server"))
         	{
-        		shouldStartVectoriumd = true;
+        		shouldStartvectd = true;
         	}
         }
         
-        if (!shouldStartVectoriumd) {
-        	Log.info("Splash: vectoriumd already running...");
+        if (!shouldStartvectd) {
+        	Log.info("Splash: vectd already running...");
             // What if started by hand but taking long to initialize???
 //            doDispose();
 //            return;
         } else
         {
-        	Log.info("Splash: vectoriumd will be started...");
+        	Log.info("Splash: vectd will be started...");
         }
         
         final Process daemonProcess = 
-        	shouldStartVectoriumd ? clientCaller.startDaemon() : null;
+        	shouldStartvectd ? clientCaller.startDaemon() : null;
         
         Thread.sleep(POLL_PERIOD); // just a little extra
         
@@ -143,7 +143,7 @@ public class StartupProgressDialog extends JFrame {
         if (daemonProcess != null) // Shutdown only if we started it
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
-            	Log.info("Stopping vectoriumd because we started it - now it is alive: " + 
+            	Log.info("Stopping vectd because we started it - now it is alive: " + 
                 		           StartupProgressDialog.this.isAlive(daemonProcess));
                 try 
                 {
@@ -153,7 +153,7 @@ public class StartupProgressDialog extends JFrame {
 	                while (!StartupProgressDialog.this.waitFor(daemonProcess, 3000))
 	                {
 	                	long end = System.currentTimeMillis();
-	                	Log.info("Waiting for " + ((end - start) / 1000) + " seconds for vectoriumd to exit...");
+	                	Log.info("Waiting for " + ((end - start) / 1000) + " seconds for vectd to exit...");
 	                	
 	                	if (end - start > 10 * 1000)
 	                	{
@@ -168,14 +168,14 @@ public class StartupProgressDialog extends JFrame {
 	                }
 	            
 	                if (StartupProgressDialog.this.isAlive(daemonProcess)) {
-	                	Log.info("vectoriumd is still alive although we tried to stop it. " +
+	                	Log.info("vectd is still alive although we tried to stop it. " +
 	                                           "Hopefully it will stop later!");
-	                        //System.out.println("vectoriumd is still alive, killing forcefully");
+	                        //System.out.println("vectd is still alive, killing forcefully");
 	                        //daemonProcess.destroyForcibly();
 	                    } else
-	                    	Log.info("vectoriumd shut down successfully");
+	                    	Log.info("vectd shut down successfully");
                 } catch (Exception bad) {
-                	Log.error("Couldn't stop vectoriumd!", bad);
+                	Log.error("Couldn't stop vectd!", bad);
                 }
             }
         });

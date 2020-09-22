@@ -99,25 +99,25 @@ public class OSUtil
 	}
 	
 	
-	// Returns the name of the vectoriumd server - may vary depending on the OS.
-	public static String getVectoriumd()
+	// Returns the name of the vectd server - may vary depending on the OS.
+	public static String getvectd()
 	{
-		String vectoriumd = "vectoriumd";
+		String vectd = "vectd";
 		
 		OS_TYPE os = getOSType();
 		if (os == OS_TYPE.WINDOWS)
 		{
-			vectoriumd += ".exe";
+			vectd += ".exe";
 		}
 		
-		return vectoriumd;
+		return vectd;
 	}
 	
 	
-	// Returns the name of the vectorium-cli tool - may vary depending on the OS.
+	// Returns the name of the vect-cli tool - may vary depending on the OS.
 	public static String getVectoriumCli()
 	{
-		String vectoriumcli = "vectorium-cli";
+		String vectoriumcli = "vect-cli";
 		
 		OS_TYPE os = getOSType();
 		if (os == OS_TYPE.WINDOWS)
@@ -244,7 +244,7 @@ public class OSUtil
 	}
 
 
-	// Can be used to find vectoriumd/vectorium-cli if it is not found in the same place as the wallet JAR
+	// Can be used to find vectd/vect-cli if it is not found in the same place as the wallet JAR
 	// Null if not found
 	public static File findVectoriumCommand(String command)
 		throws IOException

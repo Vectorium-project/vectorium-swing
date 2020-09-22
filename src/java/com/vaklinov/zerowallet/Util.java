@@ -103,7 +103,7 @@ public class Util
     	JsonObject jInfo = new JsonObject();
     	
     	// Error message here comes from Vectorium 1.0.7+ and is like:
-    	//vectorium-cli getinfo
+    	//vect-cli getinfo
     	//error code: -28
     	//error message:
     	//Loading block index...

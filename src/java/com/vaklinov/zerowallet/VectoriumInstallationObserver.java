@@ -73,26 +73,26 @@ public class VectoriumInstallationObserver
 			    "a directory or is otherwise inaccessible to the wallet!");
 		}
 
-		File vectoriumd = new File(dir, OSUtil.getVectoriumd());
+		File vectd = new File(dir, OSUtil.getvectd());
 		File vectoriumcli = new File(dir, OSUtil.getVectoriumCli());
 
-		if ((!vectoriumd.exists()) || (!vectoriumcli.exists()))
+		if ((!vectd.exists()) || (!vectoriumcli.exists()))
 		{
-			vectoriumd = OSUtil.findVectoriumCommand(OSUtil.getVectoriumd());
+			vectd = OSUtil.findVectoriumCommand(OSUtil.getvectd());
 			vectoriumcli = OSUtil.findVectoriumCommand(OSUtil.getVectoriumCli());
 		}
 
 		Log.info("Using Vectorium utilities: " +
-		                   "vectoriumd: "    + ((vectoriumd != null) ? vectoriumd.getCanonicalPath() : "<MISSING>") + ", " +
-		                   "vectorium-cli: " + ((vectoriumcli != null) ? vectoriumcli.getCanonicalPath() : "<MISSING>"));
+		                   "vectd: "    + ((vectd != null) ? vectd.getCanonicalPath() : "<MISSING>") + ", " +
+		                   "vect-cli: " + ((vectoriumcli != null) ? vectoriumcli.getCanonicalPath() : "<MISSING>"));
 
-		if ((vectoriumd == null) || (vectoriumcli == null) || (!vectoriumd.exists()) || (!vectoriumcli.exists()))
+		if ((vectd == null) || (vectoriumcli == null) || (!vectd.exists()) || (!vectoriumcli.exists()))
 		{
 			throw new InstallationDetectionException(
 				"The Vectorium GUI Wallet installation directory " + installDir + " needs\nto contain " +
-				"the command line utilities vectoriumd and vectorium-cli. At least one of them is missing! \n" +
+				"the command line utilities vectd and vect-cli. At least one of them is missing! \n" +
 				"Please place files VectoriumSwingWalletUI.jar, " + OSUtil.getVectoriumCli() + ", " + 
-				OSUtil.getVectoriumd() + " in the same directory.");
+				OSUtil.getvectd() + " in the same directory.");
 		}
 	}
 
@@ -158,7 +158,7 @@ public class VectoriumInstallationObserver
 					} catch (NumberFormatException nfe) { /* TODO: Log or handle exception */ };
 				} else if (i == 10)
 				{
-					if ((token.equals("vectoriumd")) || (token.endsWith("/vectoriumd")))
+					if ((token.equals("vectd")) || (token.endsWith("/vectd")))
 					{
 						info.status = DAEMON_STATUS.RUNNING;
 						foundVectorium = true;
@@ -224,11 +224,11 @@ public class VectoriumInstallationObserver
 
 				if (i == 0)
 				{
-					if (token.equals("vectoriumd.exe") || token.equals("vectoriumd"))
+					if (token.equals("vectd.exe") || token.equals("vectd"))
 					{
 						info.status = DAEMON_STATUS.RUNNING;
 						foundVectorium = true;
-						//System.out.println("Vectoriumd process data is: " + line);
+						//System.out.println("vectd process data is: " + line);
 					}
 				} else if ((i >= 4) && foundVectorium)
 				{
@@ -251,7 +251,7 @@ public class VectoriumInstallationObserver
 				} catch (NumberFormatException nfe)
 				{
 					info.residentSizeMB = 0;
-					Log.error("Error: could not find the numeric memory size of vectoriumd: " + size);
+					Log.error("Error: could not find the numeric memory size of vectd: " + size);
 				};
 				
 				break;
