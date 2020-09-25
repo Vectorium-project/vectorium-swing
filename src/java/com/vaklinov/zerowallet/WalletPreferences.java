@@ -86,7 +86,7 @@ public class WalletPreferences {
 		if (os == OS_TYPE.LINUX || os == OS_TYPE.MAC_OS)
 			defaultCommandLineToolsDir = commandLineToolsDirDefault;
 		else
-			defaultCommandLineToolsDir = System.getenv("APPDATA") + "\\Vectorium";
+			defaultCommandLineToolsDir = System.getenv("APPDATA") + "\\Vect";
 
 		if (!Files.isDirectory(Paths.get(defaultCommandLineToolsDir))) {
 			Log.info("Will ask for the directory where the command line tools are");
