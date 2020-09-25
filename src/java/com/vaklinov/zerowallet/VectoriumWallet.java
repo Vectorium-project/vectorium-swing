@@ -140,7 +140,7 @@ public class VectoriumWallet
         this.walletOps = new WalletOperations(
             	this, tabs, dashboard, addresses, sendPanel, installationObserver, clientCaller, errorReporter);
 
-        this.setSize(new Dimension(960, 427));
+        this.setSize(new Dimension(1200, 800));
 
         // Build menu
         JMenuBar mb = new JMenuBar();
